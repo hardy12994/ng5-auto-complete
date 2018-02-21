@@ -1,7 +1,14 @@
 # ng5-auto-complete
 
 This Module can be use when you want Auto-Complete Functionality on your INPUT Tag in the 
-Angular 5 Enviroment.
+Angular 5 Enviroment.You can use also with **Reactive Angular Forms** or with simple **ngmodel directive** Forms.
+
+
+![1](http://res.cloudinary.com/dkws91cqo/image/upload/v1519209918/Screenshot_from_2018-02-21_16-06-21_wky5k3.png)
+
+![2](http://res.cloudinary.com/dkws91cqo/image/upload/v1519209953/Screenshot_from_2018-02-21_16-06-25_gmgqo9.png)
+
+![3](http://res.cloudinary.com/dkws91cqo/image/upload/v1519209957/Screenshot_from_2018-02-21_16-07-07_s1ghzk.png)
 
 ## Installation -
 ```sh
@@ -15,7 +22,7 @@ Angular 5 Enviroment.
 - WORKS with **REACTIVE-ANGULAR FORMS**,**NORMAL-FORMS**,**[(ngModel)]**
 - RUN on Array of Strings `Array<String>` or an  Objects `Array<Object>`.
 - Open the Auto-List on Number of Word-Length you have Typed. _**`Default 0`**_
-- How many List-Members to be shown from Matches.  _**`Default all-are-shown`**_
+- How many List-Members to be shown from Matches.  _**`Default 15`**_
 - What Should be the `TEXT` on *NO RECORD FOUND*.
 
 Works On -
@@ -40,7 +47,7 @@ Please include these scripts in your main `index.html`.
 ```
 
 
-Now Import the AutoCompleteModule in your main NgModule of your application
+Now Import the AutoComplete in your main NgModule of your application
 
 and insert this module in your imports array of NgModule.
 
@@ -48,10 +55,10 @@ and insert this module in your imports array of NgModule.
 
    //main module
    
-   import { AutoCompleteModule } from 'ng5-auto-complete';
+   import { AutoComplete } from 'ng5-auto-complete';
    @NgModule({
        imports :[
-           AutoCompleteModule
+           AutoComplete
        ]
    })
 
@@ -105,12 +112,12 @@ This is use when you want to show when *no record found*.
 Example - `no-record-text="No Records Found!"`   
 
 
-USED AS -
+*USED AS* -
 
 ```sh
 
 <input style="margin: 40px;" id="list"
-[ultra-auto-complete]="countryList" 
+[ng5-auto-complete]="countryList" 
 [word-trigger]="2" [list-length]="10"
 filterName="name" no-record-text="No Records Found!" >
 
@@ -123,3 +130,7 @@ NOTE -
 - It always sets **String** in the input ( on any list( `String or Object` )  )
 - The List Above Should be of Array of Strings or Objects.
 - The `Input Id should be Unique` in your HTML page.
+
+
+
+*Contributions are most Wellcome.*

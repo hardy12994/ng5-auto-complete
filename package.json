@@ -1,6 +1,6 @@
 {
   "name": "ng5-auto-complete",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "An Auto-Complete Model for Angular 5 with extended features and make life easy.",
   "main": "index.js",
   "scripts": {

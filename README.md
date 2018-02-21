@@ -70,21 +70,21 @@ This will provide the list of 15 best match from provided list.
 
 Here are the *Extented features* -
 
-**[word-trigger]** -
+- **[word-trigger]** -
 
 This is use when you want to open list on perticular word count. 
 It Accepts Number. Default value = 0;
 
 Example- `[word-trigger]="2"`                  
 
-**[list-length]** -
+- **[list-length]** -
 
 This is use when you want to set the length of list which will open. 
 It Accepts Number. Default value = 15;
 
 Example- `[list-length]="10"`
 
-**filterName** -
+- **filterName** -
 
 Only use when you are providing object List as `Array<Object>`.
 which thing to filter from object and show that.
@@ -98,7 +98,7 @@ Example- ` filterName="name"`
 
 If you not provide the filtername on providing the array list of objects it will throw ERROR.
         
-**no-record-text** -
+- **no-record-text** -
 
 This is use when you want to show when *no record found*.
 

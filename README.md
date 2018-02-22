@@ -23,7 +23,7 @@ Angular 5 Enviroment.You can use also with **Reactive Angular Forms** or with si
 - RUN on Array of Strings `Array<String>` or an  Objects `Array<Object>`.
 - Open the Auto-List on Number of Word-Length you have Typed. _**`Default 0`**_
 - How many List-Members to be shown from Matches.  _**`Default 15`**_
-- What Should be the `TEXT` on *NO RECORD FOUND*.
+- What Should be the `TEXT` on *NO RECORD FOUND*. _**`Default ''`**_
 
 Works On -
 --------
@@ -47,7 +47,7 @@ Please include these scripts in your main `index.html`.
 ```
 
 
-Now Import the AutoComplete in your main NgModule of your application
+Now Import the AutoCompleteModule in your main NgModule of your application
 
 and insert this module in your imports array of NgModule.
 
@@ -55,10 +55,10 @@ and insert this module in your imports array of NgModule.
 
    //main module
    
-   import { AutoComplete } from 'ng5-auto-complete';
+   import { AutoCompleteModule } from 'ng5-auto-complete';
    @NgModule({
        imports :[
-           AutoComplete
+           AutoCompleteModule
        ]
    })
 

@@ -1,4 +1,6 @@
 # ng5-auto-complete
+# UNDER CONSTRUCTION
+
 
 This Module can be use when you want Auto-Complete Functionality on your INPUT Tag in the 
 Angular 5 Enviroment.You can use also with **Reactive Angular Forms** or with simple **ngmodel directive** Forms.
@@ -47,18 +49,18 @@ Please include these scripts in your main `index.html`.
 ```
 
 
-Now Import the AutoCompleteModule in your main NgModule of your application
+Now Import the AutoCompleteDirective in your main NgModule of your application
 
-and insert this module in your imports array of NgModule.
+and insert this module in your declarations array of NgModule.
 
  ```sh
 
    //main module
    
-   import { AutoCompleteModule } from 'ng5-auto-complete';
+   import { AutoCompleteDirective } from 'ng5-auto-complete';
    @NgModule({
-       imports :[
-           AutoCompleteModule
+       declarations :[
+           AutoCompleteDirective
        ]
    })
 

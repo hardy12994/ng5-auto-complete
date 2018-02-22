@@ -11,7 +11,7 @@ import {
 import { Observable } from "rxjs";
 import { NgControl } from "@angular/forms";
 
-declare const $: any;
+declare var $: any;
 
 @Directive({
     selector: '[ng5-auto-complete]'
@@ -98,7 +98,7 @@ export class AutoCompleteDirective implements OnInit {
     filterList() {
         var that = this;
         var fieldTomatch = new RegExp(that.elemRef.nativeElement["value"], 'ig');
-        var data;
+        var data = [];
 
         if (that.listType === "string") {
             data = that.list.filter((item: any) => (item.toLowerCase()).match(fieldTomatch));
@@ -195,9 +195,9 @@ export class AutoCompleteDirective implements OnInit {
                 // for Rectiveforms model
                 if (that.reactiveFormControl) {
                     if (that.searchfromList(ui)) {
-                        that.reactiveFormControl.control.setValue(ui.item.value);
+                        this.reactiveFormControl.control.setValue(ui.item.value);
                     } else {
-                        that.reactiveFormControl.control.setValue("");
+                        this.reactiveFormControl.control.setValue("");
                     }
                 }
 
@@ -219,9 +219,9 @@ export class AutoCompleteDirective implements OnInit {
                 // for Rectiveforms model
                 if (that.reactiveFormControl) {
                     if (that.searchfromList(ui)) {
-                        that.reactiveFormControl.control.setValue(that.elemRef.nativeElement["value"]);
+                        this.reactiveFormControl.control.setValue(that.elemRef.nativeElement["value"]);
                     } else {
-                        that.reactiveFormControl.control.setValue("");
+                        this.reactiveFormControl.control.setValue("");
                     }
                 }
 

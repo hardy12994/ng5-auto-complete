@@ -1,13 +1,10 @@
 {
   "name": "ng5-auto-complete",
-  "version": "0.0.5",
+  "version": "0.0.67",
   "description": "An Auto-Complete Model for Angular 5 with extended features and make life easy.",
-  "main": "auto.directive.ts",
+  "main": "lib/index.js",
   "scripts": {
-    "transpile": "ngc",
-    "package": "rollup -c",
-    "minify": "uglifyjs dist/bundles/autoComplete.umd.js --screw-ie8 --compress --mangle --comments --output dist/bundles/autoComplete.umd.min.js",
-    "build": "npm run transpile && npm run package && npm run minify"
+    "build:rollup": "node_modules/.bin/rollup -c rollup.config.js"
   },
   "repository": {
     "type": "git",
@@ -27,14 +24,11 @@
     "url": "https://github.com/hardy12994/ng5-auto-complete/issues"
   },
   "homepage": "https://github.com/hardy12994/ng5-auto-complete#readme",
-  "dependencies": {
-    "@angular/core": "^5.0.0",
-    "@angular/forms": "^5.0.0",
-    "rxjs": "^5.5.6"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "@angular/compiler": "^5.2.5",
-    "@angular/compiler-cli": "^5.2.5",
-    "typescript": "^2.7.2"
+    "rollup": "^0.56.2",
+    "rollup-plugin-commonjs": "^8.3.0",
+    "rollup-plugin-node-resolve": "^3.0.3",
+    "rollup-plugin-uglify": "^3.0.0"
   }
 }

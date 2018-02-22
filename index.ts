@@ -1,1 +1,2 @@
-export { AutoCompleteModule } from "./lib/module"
+export { AutoCompleteModule } from "./module"
+export { AutoCompleteDirective } from "./auto.directive"

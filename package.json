@@ -2,7 +2,7 @@
   "name": "ng5-auto-complete",
   "version": "0.0.4",
   "description": "An Auto-Complete Model for Angular 5 with extended features and make life easy.",
-  "main": "index.js",
+  "main": "auto.directive.ts",
   "scripts": {
     "transpile": "ngc",
     "package": "rollup -c",

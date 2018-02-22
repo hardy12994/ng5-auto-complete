@@ -1,5 +1,13 @@
-import { Directive, ElementRef, Input, Renderer2, OnInit, EventEmitter, Output } from "@angular/core";
-// import { Observable } from "rxjs/Observable";
+import {
+    Directive,
+    ElementRef,
+    Input,
+    Renderer2,
+    OnInit,
+    EventEmitter,
+    Output,
+    Optional
+} from "@angular/core";
 import { Observable } from "rxjs";
 import { NgControl } from "@angular/forms";
 
@@ -9,9 +17,10 @@ declare const $: any;
     selector: '[ng5-auto-complete]'
 })
 
-export class AutoComplete implements OnInit {
-    @Output() ngModelChange = new EventEmitter();
-    @Output() formControlChange = new EventEmitter();
+export class AutoCompleteDirective implements OnInit {
+
+    @Output() ngModelChange = new EventEmitter(); // for normal model change
+    @Output() valueChanged = new EventEmitter();  // for normal value change
     noRecordPlaceHolder: string;
     filterName: string;
     listlength: number = 15;
@@ -24,7 +33,8 @@ export class AutoComplete implements OnInit {
 
     constructor(public elemRef: ElementRef,
         public renderer: Renderer2,
-        public reactiveFormControl: NgControl) {
+        @Optional() public reactiveFormControl: NgControl
+    ) {
         this.inpRef = elemRef.nativeElement;
         this.activateEvents();
     }
@@ -54,10 +64,6 @@ export class AutoComplete implements OnInit {
         this.noRecordPlaceHolder = defaultText;
     }
 
-    @Input('for-reactive-forms') set forReactiveForms(list: any) {
-        this.list = list ? (list.length ? list : []) : [];
-    }
-
 
     configureListType() {
 
@@ -84,21 +90,22 @@ export class AutoComplete implements OnInit {
             return;
         }
 
+        // initiated coz- after one leter it helps to open
         this.filterList();
         this.initDropdown();
     }
 
     filterList() {
         var that = this;
-
+        var fieldTomatch = new RegExp(that.elemRef.nativeElement["value"], 'ig');
         var data;
 
         if (that.listType === "string") {
-            data = that.list.filter((item: any) => (item.toLowerCase()).includes(that.elemRef.nativeElement["value"].toLowerCase()));
+            data = that.list.filter((item: any) => (item.toLowerCase()).match(fieldTomatch));
         }
 
         if (that.listType === "object") {
-            data = that.list.filter((item: any) => (item[that.filterName].toLowerCase()).includes(that.elemRef.nativeElement["value"].toLowerCase()));
+            data = that.list.filter((item: any) => (item[that.filterName].toLowerCase()).match(fieldTomatch));
         }
 
         if (that.listlength) {
@@ -113,14 +120,17 @@ export class AutoComplete implements OnInit {
 
     initDropdown(list: any = undefined) {
 
+        var id = `#${this.inpRef["id"]}`;
+
         if (this.noRecordPlaceHolder &&
             list === undefined &&
             this.listShown.length === 1 &&
             this.listShown[0] === this.noRecordPlaceHolder) {
 
             var that = this;
+            var id = `#${that.inpRef["id"]}`;
 
-            $('#tags').autocomplete({
+            $(id).autocomplete({
                 source: function (request: any, response: any) {
                     var matcher = new RegExp(that.noRecordPlaceHolder, "i");
                     response(that.listShown, function (val: any) {
@@ -132,18 +142,17 @@ export class AutoComplete implements OnInit {
         } else {
             if (this.listType === "object") {
 
-                // var listData = _.map(this.listShown, this.filterName);
                 var listData: any = [];
                 this.listShown.forEach((item: any) => {
                     listData.push(item[this.filterName])
                 });
 
-                $("#tags").autocomplete({
+                $(id).autocomplete({
                     source: list != undefined ? list : listData
                 });
 
             } else {
-                $("#tags").autocomplete({
+                $(id).autocomplete({
                     source: list != undefined ? list : this.listShown
                 });
             }
@@ -169,41 +178,53 @@ export class AutoComplete implements OnInit {
 
     activateEvents() {
         var that = this;
+        var id = `#${that.inpRef["id"]}`;
 
-        $("#tags")
+        $(id)
             .on("autocompleteselect", function (event: any, ui: any) {
 
                 //for ngmodule                
                 if (that.searchfromList(ui)) {
                     that.ngModelChange.emit(ui.item.value);
+                    that.valueChanged.emit(ui.item.value);
                 } else {
                     that.ngModelChange.emit("");
+                    that.valueChanged.emit("");
                 }
 
-                //for Rectiveforms model
-                if (that.searchfromList(ui)) {
-                    that.reactiveFormControl.control.setValue(ui.item.value);
-                } else {
-                    that.reactiveFormControl.control.setValue("");
+                // for Rectiveforms model
+                if (that.reactiveFormControl) {
+                    if (that.searchfromList(ui)) {
+                        that.reactiveFormControl.control.setValue(ui.item.value);
+                    } else {
+                        that.reactiveFormControl.control.setValue("");
+                    }
                 }
+
             });
 
-        $("#tags")
+        $(id)
             .on("autocompletechange", function (event: any, ui: any) {
 
                 //for ngmodule
                 if (that.searchfromList(ui)) {
                     that.ngModelChange.emit(that.elemRef.nativeElement["value"]);
+                    that.valueChanged.emit(that.elemRef.nativeElement["value"]);
+
                 } else {
                     that.ngModelChange.emit("");
+                    that.valueChanged.emit("");
                 }
 
-                //for Rectiveforms model
-                if (that.searchfromList(ui)) {
-                    that.reactiveFormControl.control.setValue(that.elemRef.nativeElement["value"]);
-                } else {
-                    that.reactiveFormControl.control.setValue("");
+                // for Rectiveforms model
+                if (that.reactiveFormControl) {
+                    if (that.searchfromList(ui)) {
+                        that.reactiveFormControl.control.setValue(that.elemRef.nativeElement["value"]);
+                    } else {
+                        that.reactiveFormControl.control.setValue("");
+                    }
                 }
+
             });
 
         Observable.fromEvent(this.elemRef.nativeElement, 'keyup')

@@ -1,3 +1,4 @@
+```sh
 {
   "name": "ng5-auto-complete",
   "version": "0.0.67",
@@ -46,3 +47,4 @@
     "uglify-js": "^3.3.12"
   }
 }
+```

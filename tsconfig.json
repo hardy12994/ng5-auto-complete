@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "lib",
+    "baseUrl": ".",
     "declaration": true,
     "stripInternal": true,
     "experimentalDecorators": true,
@@ -25,8 +25,7 @@
     ]
   },
   "files": [
-    "lib/index.ts",
-    "lib/*"
+    "index.ts"
   ],
   "angularCompilerOptions": {
     "strictMetadataEmit": true

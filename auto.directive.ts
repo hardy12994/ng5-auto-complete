@@ -98,7 +98,7 @@ export class AutoCompleteDirective implements OnInit {
     filterList() {
         var that = this;
         var fieldTomatch = new RegExp(that.elemRef.nativeElement["value"], 'ig');
-        var data;
+        var data = [];
 
         if (that.listType === "string") {
             data = that.list.filter((item: any) => (item.toLowerCase()).match(fieldTomatch));

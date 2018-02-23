@@ -1,7 +1,8 @@
+```sh
 {
   "name": "ng5-auto-complete",
-  "version": "0.0.8",
-  "description": "An Auto-Complete Module for Angular 5 with extended features and make life easy.",
+  "version": "0.0.67",
+  "description": "An Auto-Complete Model for Angular 5 with extended features and make life easy.",
   "main": "index.js",
   "typings": "index.d.ts",
   "scripts": {
@@ -18,9 +19,7 @@
     "ng5-auto-complete",
     "auto-complete",
     "ng5",
-    "auto-list-ng5",
-    "auto-input-ng5",
-    "ng5-auto-input",
+    "auto-list",
     "ng-auto-complete",
     "autoComplete-ng5"
   ],
@@ -48,3 +47,4 @@
     "uglify-js": "^3.3.12"
   }
 }
+```

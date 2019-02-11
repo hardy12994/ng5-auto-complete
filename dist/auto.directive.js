@@ -1,13 +1,21 @@
-import { Directive, ElementRef, Input, Renderer2, EventEmitter, Output, Optional } from "@angular/core";
-import { Observable } from "rxjs";
-import { NgControl } from "@angular/forms";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+import { Directive, Input, EventEmitter, Output, Optional } from "@angular/core";
+import { fromEvent } from "rxjs";
 var AutoCompleteDirective = /** @class */ (function () {
     function AutoCompleteDirective(elemRef, renderer, reactiveFormControl) {
         this.elemRef = elemRef;
         this.renderer = renderer;
         this.reactiveFormControl = reactiveFormControl;
-        this.ngModelChange = new EventEmitter();
-        this.valueChanged = new EventEmitter();
+        this.ngModelChange = new EventEmitter(); // for normal model change
+        this.valueChanged = new EventEmitter(); // for normal value change
         this.listlength = 15;
         this.dropdownInitiated = false;
         this.inpRef = elemRef.nativeElement;
@@ -147,7 +155,7 @@ var AutoCompleteDirective = /** @class */ (function () {
         var id = "#" + that.inpRef["id"];
         $(id)
             .on("autocompleteselect", function (event, ui) {
-            //for ngmodule
+            //for ngmodule                
             if (that.searchfromList(ui)) {
                 that.ngModelChange.emit(ui.item.value);
                 that.valueChanged.emit(ui.item.value);
@@ -187,7 +195,7 @@ var AutoCompleteDirective = /** @class */ (function () {
                 }
             }
         });
-        Observable.fromEvent(this.elemRef.nativeElement, 'keyup')
+        fromEvent(this.elemRef.nativeElement, 'keyup')
             .subscribe(function (e) {
             _this.removeOldList();
             if (that.inpRef["value"].length <= (that.wordTrigger - 1)) {
@@ -206,26 +214,33 @@ var AutoCompleteDirective = /** @class */ (function () {
     AutoCompleteDirective.prototype.removeOldList = function () {
         this.initDropdown([]);
     };
-    AutoCompleteDirective.decorators = [
-        { type: Directive, args: [{
-                    selector: '[ng5-auto-complete]'
-                },] },
-    ];
-    /** @nocollapse */
-    AutoCompleteDirective.ctorParameters = function () { return [
-        { type: ElementRef, },
-        { type: Renderer2, },
-        { type: NgControl, decorators: [{ type: Optional },] },
-    ]; };
-    AutoCompleteDirective.propDecorators = {
-        "ngModelChange": [{ type: Output },],
-        "valueChanged": [{ type: Output },],
-        "autoComplete": [{ type: Input, args: ['ng5-auto-complete',] },],
-        "openOnWordLength": [{ type: Input, args: ['word-trigger',] },],
-        "listLengthToShow": [{ type: Input, args: ['list-length',] },],
-        "filterIdentity": [{ type: Input, args: ['filterName',] },],
-        "noRecordText": [{ type: Input, args: ['no-record-text',] },],
-    };
+    __decorate([
+        Output()
+    ], AutoCompleteDirective.prototype, "ngModelChange", void 0);
+    __decorate([
+        Output()
+    ], AutoCompleteDirective.prototype, "valueChanged", void 0);
+    __decorate([
+        Input('ng6-auto-complete')
+    ], AutoCompleteDirective.prototype, "autoComplete", null);
+    __decorate([
+        Input('word-trigger')
+    ], AutoCompleteDirective.prototype, "openOnWordLength", null);
+    __decorate([
+        Input('list-length')
+    ], AutoCompleteDirective.prototype, "listLengthToShow", null);
+    __decorate([
+        Input('filterName')
+    ], AutoCompleteDirective.prototype, "filterIdentity", null);
+    __decorate([
+        Input('no-record-text')
+    ], AutoCompleteDirective.prototype, "noRecordText", null);
+    AutoCompleteDirective = __decorate([
+        Directive({
+            selector: '[ng5-auto-complete]'
+        }),
+        __param(2, Optional())
+    ], AutoCompleteDirective);
     return AutoCompleteDirective;
 }());
 export { AutoCompleteDirective };

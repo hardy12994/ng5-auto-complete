@@ -1,6 +1,6 @@
 {
   "name": "ng5-auto-complete",
-  "version": "0.0.8",
+  "version": "1.0.8",
   "description": "An Auto-Complete Module for Angular 5 with extended features and make life easy.",
   "main": "index.js",
   "typings": "index.d.ts",
@@ -31,12 +31,12 @@
   },
   "homepage": "https://github.com/hardy12994/ng5-auto-complete#readme",
   "dependencies": {
-    "@angular/core": "^5.0.0",
-    "@angular/forms": "^5.0.0"
+    "@angular/core": "7.2.4",
+    "@angular/forms": "7.2.4"
   },
   "devDependencies": {
-    "@angular/compiler": "^5.2.6",
-    "@angular/compiler-cli": "^5.2.6",
+    "@angular/compiler": "7.2.4",
+    "@angular/compiler-cli": "7.2.4",
     "node-sass": "^4.5.3",
     "rollup": "^0.50.1",
     "rollup-plugin-angular": "^0.5.3",
@@ -45,6 +45,7 @@
     "rollup-plugin-typescript": "^0.8.1",
     "rollup-plugin-typescript2": "^0.8.0",
     "typescript": "^2.3.4",
-    "uglify-js": "^3.3.12"
+    "uglify-js": "^3.3.12",
+    "rxjs": "6.4.0"
   }
 }

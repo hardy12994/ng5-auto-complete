@@ -8,7 +8,7 @@ import {
     Output,
     Optional
 } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, fromEvent } from "rxjs";
 import { NgControl } from "@angular/forms";
 
 declare const $: any;
@@ -44,7 +44,7 @@ export class AutoCompleteDirective implements OnInit {
         this.configureDirective();
     }
 
-    @Input('ng5-auto-complete') set autoComplete(list: any) {
+    @Input('ng6-auto-complete') set autoComplete(list: any) {
         this.list = list ? (list.length ? list : []) : [];
     }
 
@@ -227,7 +227,7 @@ export class AutoCompleteDirective implements OnInit {
 
             });
 
-        Observable.fromEvent(this.elemRef.nativeElement, 'keyup')
+        fromEvent(this.elemRef.nativeElement, 'keyup')
             .subscribe((e: any) => {
 
                 this.removeOldList();
